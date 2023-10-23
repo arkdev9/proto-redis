@@ -14,21 +14,22 @@ func Cli(input string) string {
 	if len(args) < 2 {
 		return "Invalid number of args"
 	}
-	cmd := args[1]
+	cmd := args[0]
+	cmd = strings.ToUpper(cmd)
 	switch cmd {
 	case "SET":
 		// SET key value
 		// Check for length of arguments. We need arg=2 and arg=3 to be able to set a key
-		if len(args) != 4 {
-			return "Invalid number of arguments"
-		}
-		db.Set(args[2], args[3])
-	case "GET":
 		if len(args) != 3 {
 			return "Invalid number of arguments"
 		}
+		db.Set(args[1], args[2])
+	case "GET":
+		if len(args) != 2 {
+			return "Invalid number of arguments"
+		}
 		// GET key
-		return db.Get(args[2])
+		return db.Get(args[1])
 	// case "DEL":
 	// 	// DEL key
 	// case "EXIT":

@@ -5,15 +5,15 @@ OK
 set xyz Abhishek
 OK
 get x
-"10"
+10
 get y
-"Error: Key does not exist"
+Error: Key does not exist
 get xyz
-"Abhishek"
+Abhishek
 set x 20
 OK
 get x
-"20"
+20
 del x
 (integer) 1
 get x

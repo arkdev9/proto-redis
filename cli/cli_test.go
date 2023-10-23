@@ -21,13 +21,15 @@ func TestCli(t *testing.T) {
 	for i := 0; i < len(splitStrings); i += 2 {
 		cmd := splitStrings[i]
 		output := splitStrings[i+1]
-		computedOutput := cli.Cli(cmd)
-		if computedOutput != output {
-			t.Errorf(
-				"Invalid testcase\nCMD: %s\nExpected: %s\nComputed: %s\n",
-				cmd,
-				output,
-				computedOutput)
-		}
+		t.Run(cmd, func(t *testing.T) {
+			computedOutput := cli.Cli(cmd)
+			if computedOutput != output {
+				t.Errorf(
+					"Invalid testcase\nCMD: %s\nExpected: %s\nComputed: %s\n",
+					cmd,
+					output,
+					computedOutput)
+			}
+		})
 	}
 }
