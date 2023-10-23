@@ -1,6 +1,6 @@
 # Introduction
 
-This is a bad implementation of the basic functionalities of Redis. Created by following along with this project spec: https://playbook.one2n.in/key-value-db-redis-in-go
+This is an experimental implementation of the basic functionalities of Redis. Created by following along with this project spec: https://playbook.one2n.in/key-value-db-redis-in-go
 
 ## Usage
 
