@@ -1,7 +1,6 @@
 package cli
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/arkdev9/bad-redis/db"
@@ -28,14 +27,17 @@ func Cli(input string) string {
 		if len(args) != 2 {
 			return "Invalid number of arguments"
 		}
-		// GET key
+
 		return db.Get(args[1])
-	// case "DEL":
-	// 	// DEL key
-	// case "EXIT":
-	// 	// EXIT
+	case "DEL":
+		if len(args) != 2 {
+			return "Invalid number of arguments"
+		}
+		return db.Del(args[1])
+	case "EXIT":
+		panic("Received exit")
 	default:
-		fmt.Println("Invalid command")
+		return "Invalid command"
 	}
 	return "OK"
 }

@@ -17,4 +17,4 @@ get x
 del x
 (integer) 1
 get x
-(nil)
+Error: Key does not exist

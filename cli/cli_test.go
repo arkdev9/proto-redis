@@ -25,7 +25,7 @@ func TestCli(t *testing.T) {
 			computedOutput := cli.Cli(cmd)
 			if computedOutput != output {
 				t.Errorf(
-					"Invalid testcase\nCMD: %s\nExpected: %s\nComputed: %s\n",
+					"Failed testcase\nCMD: %s\nExpected: %s\nComputed: %s\n",
 					cmd,
 					output,
 					computedOutput)
