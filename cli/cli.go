@@ -1,6 +1,8 @@
 package cli
 
 import (
+	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/arkdev9/bad-redis/db"
@@ -34,6 +36,20 @@ func Cli(input string) string {
 			return "Invalid number of arguments"
 		}
 		return db.Del(args[1])
+	case "INCR":
+		if len(args) != 2 {
+			return "Invalid number of arguments"
+		}
+		return db.Incr(args[1])
+	case "INCRBY":
+		if len(args) != 3 {
+			return "Invalid number of arguments"
+		}
+		incrByVal, ok := strconv.Atoi(args[2])
+		if ok != nil {
+			return fmt.Sprintf("Invalid increment value\n%s", ok)
+		}
+		return db.Incr(args[1], incrByVal)
 	case "EXIT":
 		panic("Received exit")
 	default:

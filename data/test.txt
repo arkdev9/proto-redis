@@ -18,3 +18,13 @@ del x
 (integer) 1
 get x
 Error: Key does not exist
+set x 10
+OK
+incr x
+OK
+get x
+11
+incrby x 15
+OK
+get x
+26

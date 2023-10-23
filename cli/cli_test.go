@@ -9,7 +9,6 @@ import (
 )
 
 func TestCli(t *testing.T) {
-	// Read the test file
 	data, err := os.ReadFile("../data/test.txt")
 	if err != nil {
 		t.Errorf("Could not read test data file")
