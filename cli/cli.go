@@ -8,15 +8,25 @@ import (
 	"github.com/arkdev9/bad-redis/db"
 )
 
+// Buffers to store multi blocks
+var buffer []string = make([]string, 0)
+var multiMode bool = false
+
 func Cli(input string) string {
 	args := strings.Split(input, " ")
 	// First arg should always be the command
 	// Depending on the command, the number of args will vary
-	if len(args) < 2 {
+	if len(args) < 1 {
 		return "Invalid number of args"
 	}
 	cmd := args[0]
 	cmd = strings.ToUpper(cmd)
+
+	if multiMode && cmd != "EXEC" {
+		buffer = append(buffer, input)
+		return "OK"
+	}
+
 	switch cmd {
 	case "SET":
 		// SET key value
@@ -50,6 +60,22 @@ func Cli(input string) string {
 			return fmt.Sprintf("Invalid increment value\n%s", ok)
 		}
 		return db.Incr(args[1], incrByVal)
+	case "MULTI":
+		multiMode = true
+		return "OK"
+	case "EXEC":
+		// Disable multi mode
+		multiMode = false
+		// Flush buffer and execute them by recursively running Cli with inputs
+		fmt.Println("Executing...")
+		for _, bufferInput := range buffer {
+			fmt.Println(Cli(bufferInput))
+		}
+		return "OK"
+	case "DISCARD":
+		multiMode = false
+		buffer = make([]string, 0)
+		return "OK"
 	case "EXIT":
 		panic("Received exit")
 	default:

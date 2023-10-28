@@ -28,3 +28,13 @@ incrby x 15
 OK
 get x
 26
+multi
+OK
+set x 29
+OK
+incr x
+OK
+get x
+OK
+exec
+OK
